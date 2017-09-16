@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Estudos</string>
+    <string name="main_title">CRUD SQLite</string>
+</resources>
