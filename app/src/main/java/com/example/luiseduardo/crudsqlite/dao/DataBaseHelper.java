@@ -17,7 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            db.execSQL(LivroDAO.CREATE_TABLE);
+            db.execSQL(CarroDAO.CREATE_TABLE);
         } catch (Exception e) {
             Log.e("Erro ao Criar Tabelas", e.getMessage());
         }

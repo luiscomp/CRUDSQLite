@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.luiseduardo.crudsqlite.R;
-import com.example.luiseduardo.crudsqlite.vo.LivroVO;
+import com.example.luiseduardo.crudsqlite.vo.CarroVO;
 
 import java.util.ArrayList;
 
@@ -16,26 +16,26 @@ import java.util.ArrayList;
  * Created by Luis Eduardo on 16/09/2017.
  */
 
-public class LivrosRecycleViewAdapter extends RecyclerView.Adapter<LivrosRecycleViewAdapter.ViewHolder> {
+public class CarrosRecycleViewAdapter extends RecyclerView.Adapter<CarrosRecycleViewAdapter.ViewHolder> {
     private OnItemClickClistener listener;
-    private ArrayList<LivroVO> lista;
+    private ArrayList<CarroVO> lista;
 
     public interface OnItemClickClistener {
-        void aoRemover(LivroVO livro);
-        void onClickItemListener(LivroVO livro);
+        void aoRemover(CarroVO livro);
+        void onClickItemListener(CarroVO livro);
     }
 
-    public LivrosRecycleViewAdapter(ArrayList<LivroVO> lista, OnItemClickClistener listener) {
+    public CarrosRecycleViewAdapter(ArrayList<CarroVO> lista, OnItemClickClistener listener) {
         this.lista = lista;
         this.listener = listener;
     }
 
-    public void setarLista(ArrayList<LivroVO> lista) {
+    public void setarLista(ArrayList<CarroVO> lista) {
         this.lista = lista;
         notifyDataSetChanged();
     }
 
-    public void adicionarItem(LivroVO livro) {
+    public void adicionarItem(CarroVO livro) {
         if(lista == null) {
             lista = new ArrayList<>();
         }
@@ -54,22 +54,22 @@ public class LivrosRecycleViewAdapter extends RecyclerView.Adapter<LivrosRecycle
         }
     }
 
-    public void removerItem(LivroVO livro) {
+    public void removerItem(CarroVO livro) {
         lista.remove(livro);
         notifyDataSetChanged();
     }
 
     @Override
-    public LivrosRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_livros, parent, false);
+    public CarrosRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_carros, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final LivrosRecycleViewAdapter.ViewHolder holder, final int position) {
-        holder.txtTitulo.setText(lista.get(position).getTitulo());
-        holder.txtAutor.setText(lista.get(position).getAutor());
+    public void onBindViewHolder(final CarrosRecycleViewAdapter.ViewHolder holder, final int position) {
+        holder.txtModelo.setText(lista.get(position).getModelo());
+        holder.txtMarca.setText(lista.get(position).getMarca());
         holder.txtAno.setText(lista.get(position).getAno().toString());
 
         holder.btnDeletar.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +85,8 @@ public class LivrosRecycleViewAdapter extends RecyclerView.Adapter<LivrosRecycle
                 listener.onClickItemListener(lista.get(position));
             }
         });
+
+        holder.itemView.setBackgroundColor(lista.get(position).getCor());
     }
 
     @Override
@@ -93,16 +95,16 @@ public class LivrosRecycleViewAdapter extends RecyclerView.Adapter<LivrosRecycle
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView txtTitulo;
-        private final TextView txtAutor;
+        private final TextView txtModelo;
+        private final TextView txtMarca;
         private final TextView txtAno;
         private final ImageView btnDeletar;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            txtTitulo = itemView.findViewById(R.id.txtTitulo);
-            txtAutor = itemView.findViewById(R.id.txtAutor);
+            txtModelo = itemView.findViewById(R.id.txtModelo);
+            txtMarca = itemView.findViewById(R.id.txtMarca);
             txtAno = itemView.findViewById(R.id.txtAno);
             btnDeletar = itemView.findViewById(R.id.btnDeletar);
         }

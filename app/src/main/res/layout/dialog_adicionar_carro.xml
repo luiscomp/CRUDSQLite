@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Livro"
+            android:text="Carro"
             android:textSize="@dimen/large_text_size"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"/>
@@ -29,17 +29,17 @@
         android:padding="@dimen/default_margin">
 
         <EditText
-            android:id="@+id/edtTitulo"
+            android:id="@+id/edtModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Título"
+            android:hint="Modelo"
             android:inputType="text"/>
 
         <EditText
-            android:id="@+id/edtAutor"
+            android:id="@+id/edtMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Autor"
+            android:hint="Marca"
             android:inputType="text"/>
 
         <EditText
@@ -48,6 +48,26 @@
             android:layout_height="wrap_content"
             android:hint="Ano"
             android:inputType="number"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="10dp"
+                android:text="Cor"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/vCor"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/view_selecionar_cor"/>
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout

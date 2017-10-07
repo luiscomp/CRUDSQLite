@@ -9,10 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.luiseduardo.crudsqlite.R;
-import com.example.luiseduardo.crudsqlite.adapters.LivrosRecycleViewAdapter;
-import com.example.luiseduardo.crudsqlite.dao.LivroDAO;
-import com.example.luiseduardo.crudsqlite.dialogs.DialogAdicionarLivro;
-import com.example.luiseduardo.crudsqlite.vo.LivroVO;
+import com.example.luiseduardo.crudsqlite.adapters.CarrosRecycleViewAdapter;
+import com.example.luiseduardo.crudsqlite.dao.CarroDAO;
+import com.example.luiseduardo.crudsqlite.dialogs.DialogCadastroCarro;
+import com.example.luiseduardo.crudsqlite.vo.CarroVO;
 
 import java.util.ArrayList;
 
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         fabAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogAdicionarLivro dialog = DialogAdicionarLivro.newInstance(new DialogAdicionarLivro.OnListener() {
+                DialogCadastroCarro dialog = DialogCadastroCarro.newInstance(new DialogCadastroCarro.OnListener() {
                     @Override
-                    public void aoConcluir(LivroVO livro) {
+                    public void aoConcluir(CarroVO livro) {
                         new GravarLivroAsynkTask().execute(livro);
                     }
                 });
@@ -56,17 +56,17 @@ public class MainActivity extends AppCompatActivity {
 
         rvLivros = (RecyclerView) findViewById(R.id.rvLivros);
         rvLivros.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvLivros.setAdapter(new LivrosRecycleViewAdapter(null, new LivrosRecycleViewAdapter.OnItemClickClistener() {
+        rvLivros.setAdapter(new CarrosRecycleViewAdapter(null, new CarrosRecycleViewAdapter.OnItemClickClistener() {
             @Override
-            public void aoRemover(LivroVO livro) {
+            public void aoRemover(CarroVO livro) {
                 new DeletarLivroAsynkTask().execute(livro);
             }
 
             @Override
-            public void onClickItemListener(LivroVO livro) {
-                DialogAdicionarLivro dialog = DialogAdicionarLivro.newInstance(livro, new DialogAdicionarLivro.OnListener() {
+            public void onClickItemListener(CarroVO livro) {
+                DialogCadastroCarro dialog = DialogCadastroCarro.newInstance(livro, new DialogCadastroCarro.OnListener() {
                     @Override
-                    public void aoConcluir(LivroVO livro) {
+                    public void aoConcluir(CarroVO livro) {
                         new GravarLivroAsynkTask().execute(livro);
                     }
                 });
@@ -75,51 +75,51 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
-    private class GravarLivroAsynkTask extends AsyncTask<LivroVO, LivroVO, LivroVO> {
+    private class GravarLivroAsynkTask extends AsyncTask<CarroVO, CarroVO, CarroVO> {
         @Override
-        protected LivroVO doInBackground(LivroVO... livros) {
-            LivroDAO.abrirConexao(MainActivity.this);
-            LivroDAO.inserir(livros[0]);
-            LivroDAO.fecharConexao();
+        protected CarroVO doInBackground(CarroVO... livros) {
+            CarroDAO.abrirConexao(MainActivity.this);
+            CarroDAO.inserir(livros[0]);
+            CarroDAO.fecharConexao();
             return livros[0];
         }
 
         @Override
-        protected void onPostExecute(LivroVO livro) {
-            ((LivrosRecycleViewAdapter) rvLivros.getAdapter()).adicionarItem(livro);
+        protected void onPostExecute(CarroVO livro) {
+            ((CarrosRecycleViewAdapter) rvLivros.getAdapter()).adicionarItem(livro);
         }
     }
 
-    private class RecuperarLivrosAsynkTask extends AsyncTask<Void, Void, ArrayList<LivroVO>> {
+    private class RecuperarLivrosAsynkTask extends AsyncTask<Void, Void, ArrayList<CarroVO>> {
         @Override
-        protected ArrayList<LivroVO> doInBackground(Void... voids) {
-            ArrayList<LivroVO> lista;
+        protected ArrayList<CarroVO> doInBackground(Void... voids) {
+            ArrayList<CarroVO> lista;
 
-            LivroDAO.abrirConexao(MainActivity.this);
-            lista = LivroDAO.recuperar(new LivroVO());
-            LivroDAO.fecharConexao();
+            CarroDAO.abrirConexao(MainActivity.this);
+            lista = CarroDAO.recuperar(new CarroVO());
+            CarroDAO.fecharConexao();
 
             return lista;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<LivroVO> lista) {
-            ((LivrosRecycleViewAdapter) rvLivros.getAdapter()).setarLista(lista);
+        protected void onPostExecute(ArrayList<CarroVO> lista) {
+            ((CarrosRecycleViewAdapter) rvLivros.getAdapter()).setarLista(lista);
         }
     }
 
-    private class DeletarLivroAsynkTask extends AsyncTask<LivroVO, Void, LivroVO>{
+    private class DeletarLivroAsynkTask extends AsyncTask<CarroVO, Void, CarroVO>{
         @Override
-        protected LivroVO doInBackground(LivroVO... livros) {
-            LivroDAO.abrirConexao(MainActivity.this);
-            LivroDAO.deletar(livros[0]);
-            LivroDAO.fecharConexao();
+        protected CarroVO doInBackground(CarroVO... livros) {
+            CarroDAO.abrirConexao(MainActivity.this);
+            CarroDAO.deletar(livros[0]);
+            CarroDAO.fecharConexao();
             return livros[0];
         }
 
         @Override
-        protected void onPostExecute(LivroVO livro) {
-            ((LivrosRecycleViewAdapter) rvLivros.getAdapter()).removerItem(livro);
+        protected void onPostExecute(CarroVO livro) {
+            ((CarrosRecycleViewAdapter) rvLivros.getAdapter()).removerItem(livro);
         }
     }
 }

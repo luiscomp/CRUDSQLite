@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:id="@+id/rootView"
     android:layout_margin="@dimen/default_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,17 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:padding="5dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtTitulo"
+            android:id="@+id/txtModelo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/large_text_size"/>
 
 
         <TextView
-            android:id="@+id/txtAutor"
+            android:id="@+id/txtMarca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/medium_text_size"/>
